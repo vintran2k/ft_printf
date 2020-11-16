@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:51:09 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/04 15:14:32 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/12 20:38:47 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		nbr_len(int nb)
 	int len;
 
 	len = 0;
-	if (nb <= 0)
+	if (nb == 0)
 		len++;
 	while (nb)
 	{
@@ -77,58 +77,6 @@ void	*ft_memchr(const void *s, int c, size_t n)
 	return (NULL);
 }
 
-int		print_nb(int after, int nb)
-{
-	int nb_len;
-	int i;
-	int prnb_len;
-
-	i = 0;
-	prnb_len = 
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		nb *= -1;
-		i++;
-	}
-	nb_len = nbr_len(nb);
-	while (after > nb_len && i < after - nb_len)
-	{
-		ft_putchar('0');
-		i++;
-	}
-	ft_putnbr(nb);
-	i = after == 0 ? (i + nb_len) : 0;
-	return (i);
-}
-
-void	print_flag(int before, int after, int nb)
-{
-	int i;
-
-	i = 0;
-	if (before > after)
-	{
-		after = after == 0 ? 1 : after;
-		while (i < before - after)
-		{
-			ft_putchar(' ');
-			i++;
-		}
-		print_nb(after, nb);
-	}
-	else
-	{
-		i = print_nb(after, nb);
-		if (before < 0 && -before > after)
-			while (i < -before - after)
-			{
-				ft_putchar(' ');
-				i++;
-			}
-	}
-}
-
 int		is_star(const char *format)
 {
 	int star;
@@ -136,10 +84,8 @@ int		is_star(const char *format)
 
 	star = 0;
 	i = 0;
-	//printf("FORMAT = =%s=\nLEN = %d\n", format, flag_len(format));
 	if ((format = ft_memchr(format, '*', flag_len(format))))
 	{
-		//printf("========a====");
 		if (format[1] == '.')
 			return (1);
 		if (format[1] == 'd')
@@ -148,69 +94,196 @@ int		is_star(const char *format)
 	return (0);
 }
 
-void	get_flag_args(const char *format, int *before, int *after, va_list *args)
+int		is_star_ret_one(const char *format, int *before, int *after, va_list *args)
 {
-	int b;
-	int a;
+	int ret;
 
-	b = 0;
-	a = 0;
-	if (is_star(format) == 1)
+	ret = 0;
+	*before = va_arg(*args, int);
+	ret = 1;
+	*before = (*format == '-' && *before > 0) ? -(*before) : *before;
+	format = ft_memchr(format, '*', flag_len(format)) + 1;
+	if (is_star(format) == 2)
 	{
-		//printf("=====pa");
+		*after = va_arg(*args, int);
+		ret = 3;
+	}
+	return (ret);
+}
+
+int		is_star_ret_two(const char *format, int *before, int *after, va_list *args)
+{
+	int ret;
+
+	ret = 0;
+	if (ft_memchr(format, '.', flag_len(format)))
+	{
+		*after = va_arg(*args, int);
+		ret = 2;
+	}
+	else
+	{
 		*before = va_arg(*args, int);
-		b = 1;
-		format = ft_memchr(format, '*', flag_len(format)) + 1;
-		if (format[-2] == '-')
-			*before *= -1;
-		if (is_star(format) == 2)
-		{
-			*after = va_arg(*args, int);
-			a = 1;
-		}
+		ret = 1;
+		*before = (*format == '-' && *before > 0) ? -(*before) : *before;
 	}
+	return (ret);
+}
+
+int		get_flag_args(const char *format, int *before, int *after, va_list *args)
+{
+	int ret;
+
+	ret = 0;
+	if (is_star(format) == 1)
+		ret = is_star_ret_one(format, before, after, args);
 	else if (is_star(format) == 2)
-	{
-		//printf("=====pass");
-		if (ft_memchr(format, '.', flag_len(format)))
-		{
-			*after = va_arg(*args, int);
-			a = 1;
-		}
-		else
-		{
-			//printf("=====passage");
-			*before = va_arg(*args, int);
-			b = 1;
-		}
-	}
-	if (b == 0)
-		*before = ft_atoi(format);
-	if (a == 0)
+		ret = is_star_ret_two(format, before, after, args);
+	(ret != 1 && ret != 3) ? *before = ft_atoi(format) : 0;
+	if (ret != 2 && ret != 3)
 		if ((format = (const char *)ft_memchr(format, '.', flag_len(format))))
 		{
 			format++;
 			*after = ft_atoi(format);
+			ret = 3;
 		}
+	return (ret != 3) ? 0 : 1;
 }
 
-int		parsing_flag(const char *format, va_list *args) // seulement dans le cas ou on a des flags (pas pr %d tt seul)
+int		bpos_apos(int before, int after, int nb)
+{
+	int nblen;
+    int space;
+    int zero;
+    int ret;
+
+    space = 0;
+	nblen = nbr_len(nb);
+	zero = after > nblen ? after - nblen : 0;
+    nb < 0 ? nblen++ : 0;
+    space = before - (zero + nblen);
+    space = (space < 0) ? 0 : space;
+    ret = nblen + space + zero;
+    while (space-- > 0)
+        ft_putchar(' ');
+    nb < 0 ? ft_putchar('-') : 0;
+    while (zero-- > 0)
+        ft_putchar('0');
+	
+    nb < 0 ? ft_putnbr(-nb) : ft_putnbr(nb);
+    return (ret);
+}
+
+int		bpos_aneg(int before, int nb)
+{
+	int nblen;
+	int space;
+	int ret;
+
+	nblen = nbr_len(nb);
+	space = 0;
+	if (before > nblen)
+		space = before - nblen;
+	nb < 0 ? space-- : 0;
+	while (space-- > 0)
+		ft_putchar(' ');
+	ft_putnbr(nb);
+	nb < 0 ? nblen++ : 0;
+	ret = before > nblen ? before : nblen;
+	return (ret);
+}
+
+int		bneg_aneg(int before, int nb)
+{
+	int nblen;
+	int space;
+	int ret;
+
+	nblen = nbr_len(nb);
+	space = 0;
+	before = -before;
+	if (before > nblen)
+		space = before - nblen;
+	nb < 0 ? space-- : 0;
+	ft_putnbr(nb);
+	while (space-- > 0)
+		ft_putchar(' ');
+	nb < 0 ? nblen++ : 0;
+	ret = before > nblen ? before : nblen;
+	return (ret);
+}
+
+int		bneg_apos(int before, int after, int nb)
+{
+	int nblen;
+	int space;
+	int zero;
+	int ret;
+
+	nblen = nbr_len(nb);
+	space = 0;
+	zero = 0;
+	if (after > nblen)
+		zero = after - nblen;
+	nb < 0 ? nblen++ : 0;
+	before = -before;
+	space = before - (zero + nblen);
+	space < 0 ? space = 0 : 0;
+	ret = nblen + space + zero;
+	nb < 0 ? ft_putchar('-') : 0;
+	while (zero-- > 0)
+		ft_putchar('0');
+	nb < 0 ? ft_putnbr(-nb) : ft_putnbr(nb);
+	while (space-- > 0)
+		ft_putchar(' ');
+	return (ret);
+}
+
+int		special_zero(int before)
+{
+	int ret;
+
+	ret = before;
+    while (before-- > 0)
+        ft_putchar(' ');
+    return (ret);	
+}
+
+int		fonction_choice(before, after, nb)
+{
+	if (before > 0)
+	{
+		if (after < 0)
+			return (bpos_aneg(before, nb));
+		else
+			return (bpos_apos(before, after, nb));
+	}
+	else
+	{
+		if (after < 0)
+			return (bneg_aneg(before, nb));
+		else
+			return (bneg_apos(before, after, nb));
+	}
+	return (0);
+}
+
+int		parsing_flag(const char *format, va_list *args)
 {
 	int before;
 	int	after;
-	int len;
 	int nb;
 
 	before = 0;
 	after = 0;
 	format++;
-	get_flag_args(format, &before, &after, args);
-	nb = va_arg(*args, int);
-	print_flag(before, after, nb);
-//	printf("          before = %d           after = %d\n", before, after);
-	if (before > 0)
-		len = (before >= after) ? before : after;
+	if (get_flag_args(format, &before, &after, args) == 1 && after == 0)
+	{
+		nb = va_arg(*args, int);
+		if (nb == 0)
+			return (special_zero(before));
+	}
 	else
-		len = (-before >= after) ? -before : after;
-	return (len);
+		nb = va_arg(*args, int);
+	return (fonction_choice(before, after, nb));
 }
