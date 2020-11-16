@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:30:03 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/16 11:35:20 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/16 23:11:39 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,11 @@ int		get_flag_args(const char *format, int *before, int *after, va_list *args, c
 	else if (is_star(format, flag) == 2)
 		ret = is_star_ret_two(format, before, after, args, flag);
 	(ret != 1 && ret != 3) ? *before = ft_atoi(format) : 0;
+	if (ret != 1 && ret != 3)
+	{
+		*before = ft_atoi(format);
+		ret = ret == 2 ? 3 : 1;
+	}
 	if (ret != 2 && ret != 3)
 		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, flag))))
 		{

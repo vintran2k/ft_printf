@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:51:09 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/16 11:41:51 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/16 17:23:19 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ int		special_zero(int before)
     return (ret);	
 }
 
-int		fonction_choice(before, after, nb)
+int		d_fonction_choice(int before, int after, int nb)
 {
 	if (before > 0)
 	{
 		if (after < 0)
-			return (bpos_aneg(before, nb));
+			return (d_bpos_aneg(before, nb));
 		else
-			return (bpos_apos(before, after, nb));
+			return (d_bpos_apos(before, after, nb));
 	}
 	else
 	{
 		if (after < 0)
-			return (bneg_aneg(before, nb));
+			return (d_bneg_aneg(before, nb));
 		else
-			return (bneg_apos(before, after, nb));
+			return (d_bneg_apos(before, after, nb));
 	}
 	return (0);
 }
@@ -58,5 +58,5 @@ int		parsing_dflag(const char *format, va_list *args, char flag)
 	}
 	else
 		nb = va_arg(*args, int);
-	return (fonction_choice(before, after, nb));
+	return (d_fonction_choice(before, after, nb));
 }

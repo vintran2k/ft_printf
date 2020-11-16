@@ -6,13 +6,13 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:39:16 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/16 11:39:50 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/16 16:12:42 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		bpos_apos(int before, int after, int nb)
+int		d_bpos_apos(int before, int after, int nb)
 {
 	int nblen;
     int space;
@@ -36,7 +36,7 @@ int		bpos_apos(int before, int after, int nb)
     return (ret);
 }
 
-int		bpos_aneg(int before, int nb)
+int		d_bpos_aneg(int before, int nb)
 {
 	int nblen;
 	int space;
@@ -55,7 +55,7 @@ int		bpos_aneg(int before, int nb)
 	return (ret);
 }
 
-int		bneg_aneg(int before, int nb)
+int		d_bneg_aneg(int before, int nb)
 {
 	int nblen;
 	int space;
@@ -75,7 +75,7 @@ int		bneg_aneg(int before, int nb)
 	return (ret);
 }
 
-int		bneg_apos(int before, int after, int nb)
+int		d_bneg_apos(int before, int after, int nb)
 {
 	int nblen;
 	int space;
