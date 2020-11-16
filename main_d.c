@@ -2,80 +2,80 @@
 
 int main(void)
 {
-	printf(" <- [%d]\n", ft_printf("|%*d|", -13, 17));
-	printf(" <- [%d]\n\n", printf("|%*d|", -13, 17));
+	printf(" <- [%d]\n", ft_printf("|%20d|", -10));
+	printf(" <- [%d]\n\n", printf("|%20d|", -10));
 
-	printf(" <- [%d]\n", ft_printf("|%-20d|", -17));
-	printf(" <- [%d]\n\n", printf("|%-20d|", -17));
+	printf(" <- [%d]\n", ft_printf("|%-*d|", 5, 6));
+	printf(" <- [%d]\n\n", printf("|%-*d|", 5, 6));
 
-	printf(" <- [%d]\n", ft_printf("|%*.*d|", 2, -11, 0));
-	printf(" <- [%d]\n\n", printf("|%*.*d|", 2, -11, 0));
+	printf(" <- [%d]\n", ft_printf("|%1.*d|", -15, -5));
+	printf(" <- [%d]\n\n", printf("|%1.*d|", -15, -5));
 
-	printf(" <- [%d]\n", ft_printf("|%-*.*d|", -7, 2, 6));
-	printf(" <- [%d]\n\n", printf("|%-*.*d|", -7, 2, 6));
+	printf(" <- [%d]\n", ft_printf("|%-20d|", 2));
+	printf(" <- [%d]\n\n", printf("|%-20d|", 2));
 
-	printf(" <- [%d]\n", ft_printf("|%13.*d|", 9, -9));
-	printf(" <- [%d]\n\n", printf("|%13.*d|", 9, -9));
+	printf(" <- [%d]\n", ft_printf("|%-*.*d|", -15, 15, -16));
+	printf(" <- [%d]\n\n", printf("|%-*.*d|", -15, 15, -16));
 
-	printf(" <- [%d]\n", ft_printf("|%-20d|", -11));
-	printf(" <- [%d]\n\n", printf("|%-20d|", -11));
+	printf(" <- [%d]\n", ft_printf("|%-20d|", 9));
+	printf(" <- [%d]\n\n", printf("|%-20d|", 9));
 
-	printf(" <- [%d]\n", ft_printf("|%-*.12d|", -4, -18));
-	printf(" <- [%d]\n\n", printf("|%-*.12d|", -4, -18));
+	printf(" <- [%d]\n", ft_printf("|%-15.14d|", 16));
+	printf(" <- [%d]\n\n", printf("|%-15.14d|", 16));
 
-	printf(" <- [%d]\n", ft_printf("|%-*d|", 2, 16));
-	printf(" <- [%d]\n\n", printf("|%-*d|", 2, 16));
+	printf(" <- [%d]\n", ft_printf("|%*.*d|", -14, 17, -14));
+	printf(" <- [%d]\n\n", printf("|%*.*d|", -14, 17, -14));
 
-	printf(" <- [%d]\n", ft_printf("|%*.*d|", -7, -3, 7));
-	printf(" <- [%d]\n\n", printf("|%*.*d|", -7, -3, 7));
+	printf(" <- [%d]\n", ft_printf("|%*.9d|", -15, 7));
+	printf(" <- [%d]\n\n", printf("|%*.9d|", -15, 7));
 
-	printf(" <- [%d]\n", ft_printf("|%-*.*d|", -4, 19, 11));
-	printf(" <- [%d]\n\n", printf("|%-*.*d|", -4, 19, 11));
+	printf(" <- [%d]\n", ft_printf("|%*.19d|", -12, 15));
+	printf(" <- [%d]\n\n", printf("|%*.19d|", -12, 15));
 
-	printf(" <- [%d]\n", ft_printf("|%*d|", -17, 8));
-	printf(" <- [%d]\n\n", printf("|%*d|", -17, 8));
+	printf(" <- [%d]\n", ft_printf("|%-*d|", 7, 10));
+	printf(" <- [%d]\n\n", printf("|%-*d|", 7, 10));
 
-	printf(" <- [%d]\n", ft_printf("|%-*.3d|", 16, -13));
-	printf(" <- [%d]\n\n", printf("|%-*.3d|", 16, -13));
+	printf(" <- [%d]\n", ft_printf("|%20d|", 14));
+	printf(" <- [%d]\n\n", printf("|%20d|", 14));
 
-	printf(" <- [%d]\n", ft_printf("|%17.9d|", -6));
-	printf(" <- [%d]\n\n", printf("|%17.9d|", -6));
+	printf(" <- [%d]\n", ft_printf("|%11.16d|", 1));
+	printf(" <- [%d]\n\n", printf("|%11.16d|", 1));
 
-	printf(" <- [%d]\n", ft_printf("|%15.*d|", 7, -7));
-	printf(" <- [%d]\n\n", printf("|%15.*d|", 7, -7));
+	printf(" <- [%d]\n", ft_printf("|%-*d|", 17, -19));
+	printf(" <- [%d]\n\n", printf("|%-*d|", 17, -19));
 
-	printf(" <- [%d]\n", ft_printf("|%13.19d|", -16));
-	printf(" <- [%d]\n\n", printf("|%13.19d|", -16));
+	printf(" <- [%d]\n", ft_printf("|%-*.19d|", -10, -12));
+	printf(" <- [%d]\n\n", printf("|%-*.19d|", -10, -12));
 
-	printf(" <- [%d]\n", ft_printf("|%15.*d|", 15, 12));
-	printf(" <- [%d]\n\n", printf("|%15.*d|", 15, 12));
+	printf(" <- [%d]\n", ft_printf("|%-20d|", 1));
+	printf(" <- [%d]\n\n", printf("|%-20d|", 1));
 
-	printf(" <- [%d]\n", ft_printf("|%11.12d|", -16));
-	printf(" <- [%d]\n\n", printf("|%11.12d|", -16));
+	printf(" <- [%d]\n", ft_printf("|%*.*d|", 16, 15, -5));
+	printf(" <- [%d]\n\n", printf("|%*.*d|", 16, 15, -5));
 
-	printf(" <- [%d]\n", ft_printf("|%*d|", -2, -4));
-	printf(" <- [%d]\n\n", printf("|%*d|", -2, -4));
+	printf(" <- [%d]\n", ft_printf("|%20d|", 19));
+	printf(" <- [%d]\n\n", printf("|%20d|", 19));
 
-	printf(" <- [%d]\n", ft_printf("|%17.*d|", -14, -20));
-	printf(" <- [%d]\n\n", printf("|%17.*d|", -14, -20));
+	printf(" <- [%d]\n", ft_printf("|%-19.2d|", -12));
+	printf(" <- [%d]\n\n", printf("|%-19.2d|", -12));
 
-	printf(" <- [%d]\n", ft_printf("|%-*.7d|", 5, 12));
-	printf(" <- [%d]\n\n", printf("|%-*.7d|", 5, 12));
+	printf(" <- [%d]\n", ft_printf("|%-5.*d|", -19, -1));
+	printf(" <- [%d]\n\n", printf("|%-5.*d|", -19, -1));
 
-	printf(" <- [%d]\n", ft_printf("|%4.*d|", -16, -1));
-	printf(" <- [%d]\n\n", printf("|%4.*d|", -16, -1));
+	printf(" <- [%d]\n", ft_printf("|%-*d|", 1, -15));
+	printf(" <- [%d]\n\n", printf("|%-*d|", 1, -15));
 
-	printf(" <- [%d]\n", ft_printf("|%7.*d|", 4, -17));
-	printf(" <- [%d]\n\n", printf("|%7.*d|", 4, -17));
+	printf(" <- [%d]\n", ft_printf("|%*.13d|", -10, -15));
+	printf(" <- [%d]\n\n", printf("|%*.13d|", -10, -15));
 
-	printf(" <- [%d]\n", ft_printf("|%.1d|", 8));
-	printf(" <- [%d]\n\n", printf("|%.1d|", 8));
+	printf(" <- [%d]\n", ft_printf("|%-15.*d|", -9, 16));
+	printf(" <- [%d]\n\n", printf("|%-15.*d|", -9, 16));
 
-	printf(" <- [%d]\n", ft_printf("|%*d|", -2, 12));
-	printf(" <- [%d]\n\n", printf("|%*d|", -2, 12));
+	printf(" <- [%d]\n", ft_printf("|%20d|", 15));
+	printf(" <- [%d]\n\n", printf("|%20d|", 15));
 
-	printf(" <- [%d]\n", ft_printf("|%20d|", -13));
-	printf(" <- [%d]\n\n", printf("|%20d|", -13));
+	printf(" <- [%d]\n", ft_printf("|%8.4d|", -1));
+	printf(" <- [%d]\n\n", printf("|%8.4d|", -1));
 
 	return (0);
 }

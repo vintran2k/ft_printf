@@ -6,52 +6,20 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:12:20 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/12 20:39:24 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/16 11:38:02 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
-void	ft_putnbr(int nb)
-{
-	if (nb < 0)
-	{
-		ft_putchar('-');
-		if (nb == -2147483648)
-		{
-			write(1, "2147483648", 10);
-			return ;
-		}
-		nb *= -1;
-	}
-	if (nb > 9)
-		ft_putnbr(nb / 10);
-	ft_putchar(nb % 10 + '0');
-}
-
-int		print_d(const char * format, va_list *args)
-{
-	int nb;
-
-	if (flag_len(format))
-		return (parsing_flag(format, args));
-	nb = va_arg(*args, int);
-	ft_putnbr(nb);
-	return (nbr_len(nb));
-}
-
 char        find_flag(const char *format)
 {
 	int i;
 
-	i = 0;
+	i = 1;
 	while (format[i] && format[i] != 'd' && format[i] != 'c'
-			&& format[i] != 'p' && format[i] != 's')
+			&& format[i] != 'p' && format[i] != 's' && format[i] != 'x'
+			&& format[i] != 'X' && format[i] != 'i' && format[i] != '%')
 		i++;
 	return (format[i]);
 }
@@ -73,11 +41,6 @@ int		parsing_format(const char *format, va_list *args)
 	char	flag;
 
 	flag = find_flag(format);
-	if (format[1] == '%')
-	{
-		ft_putchar('%');
-		return (1);
-	}
 	if (flag == 'd')
 		return (print_d(format, args));
 	return (0);//
