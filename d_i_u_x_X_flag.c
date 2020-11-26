@@ -1,46 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_flag.c                                           :+:      :+:    :+:   */
+/*   d_i_u_x_X_flag.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/16 16:06:37 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/26 16:05:10 by vintran          ###   ########.fr       */
+/*   Created: 2020/11/03 12:51:09 by vintran           #+#    #+#             */
+/*   Updated: 2020/11/26 17:44:55 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		s_fonction_choice(t_params prm, char *str)
+int		fonction_choice(t_params prm, int nb)
 {
 	if (prm.before > 0)
 	{
 		if (prm.after < 0)
-			return (s_bpos_aneg_or_noafter(prm, str));
+			return (d_bpos_aneg(prm, nb, prm.zero_arg));
 		else
-			return (s_bpos_apos(prm, str));
+			return (d_bpos_apos(prm, nb));
 	}
 	else
 	{
 		if (prm.after < 0)
-			return (s_bneg_aneg(prm, str));
+			return (d_bneg_aneg(prm, nb));
 		else
-			return (s_bneg_apos(prm, str));
+			return (d_bneg_apos(prm, nb));
 	}
 	return (0);
 }
 
-int		parsing_sflag(const char *format, t_params *prm)
+int		parsing_d_i_u_x_X_flag(const char *format, t_params *prm)
 {
-	char	*str;
-
+	int nb;
 	format++;
-	if (get_flag_args(format, prm) == 1)
+	if (get_flag_args(format, prm) == 3 && prm->after == 0)
 	{
-		str = va_arg(*(prm->args), char *);
-		return (s_bpos_aneg_or_noafter(*prm, str));
+		nb = va_arg(*(prm->args), int);
+		if (nb == 0)
+			return (special_zero(prm->before));
 	}
-	str = va_arg(*(prm->args), char *);
-	return (s_fonction_choice(*prm, str));
+	else
+		nb = va_arg(*(prm->args), int);
+	//printf("BEFORE = %d   AFTER = %d|", prm->before, prm->after);
+	return (fonction_choice(*prm, nb));
 }

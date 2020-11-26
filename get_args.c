@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:30:03 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/16 23:11:39 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/21 14:55:59 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,63 +29,77 @@ int		is_star(const char *format, char flag)
 	return (0);
 }
 
-int		is_star_ret_one(const char *format, int *before, int *after, va_list *args, char flag)
+int		is_star_ret_one(const char *format, t_params *prm)
 {
 	int ret;
 
 	ret = 0;
-	*before = va_arg(*args, int);
+	prm->before = va_arg(*(prm->args), int);
 	ret = 1;
-	*before = (*format == '-' && *before > 0) ? -(*before) : *before;
-	format = ft_memchr(format, '*', flag_len(format, flag)) + 1;
-	if (is_star(format, flag) == 2)
+	if (*format == '-' && prm->before > 0)
+		prm->before = -(prm->before);
+	format = ft_memchr(format, '*', flag_len(format, prm->flag)) + 1;
+	if (is_star(format, prm->flag) == 2)
 	{
-		*after = va_arg(*args, int);
+		prm->after = va_arg(*(prm->args), int);
 		ret = 3;
 	}
 	return (ret);
 }
 
-int		is_star_ret_two(const char *format, int *before, int *after, va_list *args, char flag)
+int		is_star_ret_two(const char *format, t_params *prm)
 {
 	int ret;
 
 	ret = 0;
-	if (ft_memchr(format, '.', flag_len(format, flag)))
+	if (ft_memchr(format, '.', flag_len(format, prm->flag)))
 	{
-		*after = va_arg(*args, int);
+		prm->after = va_arg(*(prm->args), int);
 		ret = 2;
 	}
 	else
 	{
-		*before = va_arg(*args, int);
+		prm->before = va_arg(*(prm->args), int);
 		ret = 1;
-		*before = (*format == '-' && *before > 0) ? -(*before) : *before;
+		if (*format == '-' && prm->before > 0)
+			prm->before = -(prm->before);
 	}
 	return (ret);
 }
 
-int		get_flag_args(const char *format, int *before, int *after, va_list *args, char flag)
+int		get_star_args(const char *format, t_params *prm)
 {
 	int ret;
 
 	ret = 0;
-	if (is_star(format, flag) == 1)
-		ret = is_star_ret_one(format, before, after, args, flag);
-	else if (is_star(format, flag) == 2)
-		ret = is_star_ret_two(format, before, after, args, flag);
-	(ret != 1 && ret != 3) ? *before = ft_atoi(format) : 0;
+	if (is_star(format, prm->flag) == 1)
+		ret = is_star_ret_one(format, prm);
+	else if (is_star(format, prm->flag) == 2)
+		ret = is_star_ret_two(format, prm);
+	return (ret);
+}
+
+int		get_flag_args(const char *format, t_params *prm)
+{
+	int ret;
+
+	ret = get_star_args(format, prm);
 	if (ret != 1 && ret != 3)
 	{
-		*before = ft_atoi(format);
-		ret = ret == 2 ? 3 : 1;
+		prm->before = ft_atoi(format);
+		if (ret == 2)
+			ret = 3;
+		else
+			ret = 1;
 	}
+	if (*format == '0' && prm->before)
+		prm->zero_arg = '0';
 	if (ret != 2 && ret != 3)
-		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, flag))))
+		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, prm->flag))))
 		{
 			format++;
-			*after = ft_atoi(format);
+			prm->after = ft_atoi(format);
 			ret = 3;
 		}
-	return (ret != 3) ? 0 : 1;
+	return (ret);
 }

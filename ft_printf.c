@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:12:20 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/17 00:14:28 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/26 17:39:26 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char        find_flag(const char *format)
 	int i;
 
 	i = 1;
-	while (format[i] && format[i] != 'd' && format[i] != 'c'
+	while (format[i] && format[i] != 'd' && format[i] != 'c' && format[i] != 'u'
 			&& format[i] != 'p' && format[i] != 's' && format[i] != 'x'
 			&& format[i] != 'X' && format[i] != 'i' && format[i] != '%')
 		i++;
@@ -41,11 +41,11 @@ int		parsing_format(const char *format, va_list *args)
 	char	flag;
 
 	flag = find_flag(format);
-	if (flag == 'd')
-		return (print_d(format, args));
+	if (flag == 'd' || flag == 'i' || flag == 'x' || flag == 'X' || flag == 'u')
+		return (print_d_i_u_x_X(format, args, flag));
 	if (flag == 's')
 		return (print_s(format, args));
-	return (0);//
+	return (0);
 }
 
 int		ft_printf(const char *format, ...)

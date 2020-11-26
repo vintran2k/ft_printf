@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 10:38:00 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/16 16:02:34 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/26 17:43:12 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,20 @@ int		nbr_len(int nb)
 	while (nb)
 	{
 		nb /= 10;
-		len ++;
+		len++;
+	}
+	return (len);
+}
+
+int		nbr_unsigned_len(unsigned int nb, unsigned int base)
+{
+	int len;
+
+	len = 1;
+	while (nb >= base)
+	{
+		nb /= base;
+		len++;
 	}
 	return (len);
 }
