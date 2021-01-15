@@ -1,39 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_flag2.c                                          :+:      :+:    :+:   */
+/*   c_flag2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/16 16:25:23 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 11:46:26 by vintran          ###   ########.fr       */
+/*   Created: 2020/12/18 16:23:39 by vintran           #+#    #+#             */
+/*   Updated: 2021/01/15 11:54:26 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		s_bpos_apos(t_params prm, char *str)
+int		c_bpos_apos(t_params prm, char c)
 {
-	int		i;
 	t_pos	var;
 
-	i = 0;
-	init_var_apos_char(prm, &var, (int)ft_strlen(str));
+	init_var_apos_char(prm, &var, 1);
 	while (var.space--)
 		ft_putchar(' ');
-	while (i < var.len)
-		ft_putchar(str[i++]);
+	ft_putchar(c);
 	return (var.ret);
 }
 
-int		s_bpos_aneg_or_noafter(t_params prm, char *str)
+int		c_bpos_aneg_or_noafter(t_params prm, char c)
 {
 	t_pos	var;
 
-	init_var_aneg_char(prm, &var, (int)ft_strlen(str));
+	init_var_aneg_char(prm, &var, 1);
 	if (prm.before < 0)
 	{
-		ft_putstr(str);
+		ft_putchar(c);
 		while (var.space--)
 			ft_putchar(' ');
 	}
@@ -41,31 +38,31 @@ int		s_bpos_aneg_or_noafter(t_params prm, char *str)
 	{
 		while (var.space--)
 			ft_putchar(' ');
-		ft_putstr(str);
+		ft_putchar(c);
 	}
 	return (var.ret);
 }
 
-int		s_bneg_aneg(t_params prm, char *str)
+int		c_bneg_aneg(t_params prm, char c)
 {
 	t_pos	var;
 
-	init_var_aneg_char(prm, &var, (int)ft_strlen(str));
-	ft_putstr(str);
+	init_var_aneg_char(prm, &var, 1);
+	ft_putchar(c);
 	while (var.space--)
 		ft_putchar(' ');
 	return (var.ret);
 }
 
-int		s_bneg_apos(t_params prm, char *str)
+int		c_bneg_apos(t_params prm, char c)
 {
 	int		i;
 	t_pos	var;
 
 	i = 0;
-	init_var_apos_char(prm, &var, (int)ft_strlen(str));
+	init_var_apos_char(prm, &var, 1);
 	while (var.len--)
-		ft_putchar(str[i++]);
+		ft_putchar(c);
 	while (var.space--)
 		ft_putchar(' ');
 	return (var.ret);

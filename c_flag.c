@@ -1,46 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   s_flag.c                                           :+:      :+:    :+:   */
+/*   c_flag.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/16 16:06:37 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/27 15:14:38 by vintran          ###   ########.fr       */
+/*   Created: 2020/12/18 16:20:54 by vintran           #+#    #+#             */
+/*   Updated: 2021/01/15 11:58:05 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		s_fonction_choice(t_params prm, char *str)
+int		c_fonction_choice(t_params prm, char c)
 {
 	if (prm.before > 0)
 	{
 		if (prm.after < 0)
-			return (s_bpos_aneg_or_noafter(prm, str));
+			return (c_bpos_aneg_or_noafter(prm, c));
 		else
-			return (s_bpos_apos(prm, str));
+			return (c_bpos_apos(prm, c));
 	}
 	else
 	{
 		if (prm.after < 0)
-			return (s_bneg_aneg(prm, str));
+			return (c_bneg_aneg(prm, c));
 		else
-			return (s_bneg_apos(prm, str));
+			return (c_bneg_apos(prm, c));
 	}
 	return (0);
 }
 
-int		parsing_s(const char *format, t_params *prm)
+int		parsing_c(const char *format, t_params *prm)
 {
-	char	*str;
+	char	c;
 
 	format++;
 	if (get_flag_args(format, prm) == 1)
 	{
-		str = va_arg(*(prm->args), char *);
-		return (s_bpos_aneg_or_noafter(*prm, str));
+		c = va_arg(*(prm->args), int);
+		return (c_bpos_aneg_or_noafter(*prm, c));
 	}
-	str = va_arg(*(prm->args), char *);
-	return (s_fonction_choice(*prm, str));
+	c = va_arg(*(prm->args), int);
+	return (c_fonction_choice(*prm, c));
 }

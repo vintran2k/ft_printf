@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/28 16:12:20 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/26 17:39:26 by vintran          ###   ########.fr       */
+/*   Updated: 2020/12/18 14:51:45 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,10 @@ int		parsing_format(const char *format, va_list *args)
 		return (print_d_i_u_x_X(format, args, flag));
 	if (flag == 's')
 		return (print_s(format, args));
+	if (flag == 'p')
+		return (print_p(format, args));
+	if (flag == 'c')
+		return (print_c(format, args));
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 17:41:33 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/26 17:44:43 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/27 15:39:43 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,20 @@ void	print_nb(int nb, char flag)
 		ft_putnbr_hex(nb, flag);
 }
 
+void	print_addr(unsigned long long addr)
+{
+	char *base = "0123456789abcdef";
+
+	if (!addr)
+	{
+		ft_putchar('0');
+		ft_putchar('x');
+		return ;
+	}
+	print_addr(addr / 16);
+	ft_putchar(base[addr % 16]);
+}
+
 int		real_len(int nb, char flag)
 {
 	if (flag == 'd')
@@ -53,14 +67,4 @@ int		real_len(int nb, char flag)
 	if (flag == 'x' || flag == 'X')
 		return (nbr_unsigned_len(nb, 16));
 	return (0);
-}
-
-int		special_zero(int before)
-{
-	int ret;
-
-	ret = before;
-    while (before-- > 0)
-        ft_putchar(' ');
-    return (ret);
 }

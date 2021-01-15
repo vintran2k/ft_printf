@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 17:46:08 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/26 17:54:26 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/15 11:46:02 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ void	init_var_aneg(t_params prm, t_pos *var, int nb)
 //	printf("   NBLEN = %d  SPACE = %d  RET = %d  |", var->len, var->space, var->ret);
 }
 
-void	init_var_apos_s(t_params prm, t_pos *var, char *str)
+void	init_var_apos_char(t_params prm, t_pos *var, int len)
 {
-	var->len = (int)ft_strlen(str);
+	var->len = len;
 	if (prm.before < 0)
 		prm.before = -(prm.before);
 	if (prm.after < var->len)
@@ -71,9 +71,9 @@ void	init_var_apos_s(t_params prm, t_pos *var, char *str)
 	var->ret = var->space + var->len;
 }
 
-void	init_var_aneg_s(t_params prm, t_pos *var, char *str)
+void	init_var_aneg_char(t_params prm, t_pos *var, int len)
 {
-	var->len = (int)ft_strlen(str);
+	var->len = len;
 	if (prm.before < 0)
 		prm.before = -(prm.before);
 	var->space = 0;

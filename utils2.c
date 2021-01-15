@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 10:38:00 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/26 17:43:12 by vintran          ###   ########.fr       */
+/*   Updated: 2020/11/27 15:05:37 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ int		nbr_unsigned_len(unsigned int nb, unsigned int base)
 	while (nb >= base)
 	{
 		nb /= base;
+		len++;
+	}
+	return (len);
+}
+
+int		addrlen(unsigned long long addr)
+{
+	int len;
+
+	len = 0;
+	while (addr)
+	{
+		addr /= 16;
 		len++;
 	}
 	return (len);

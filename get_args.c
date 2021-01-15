@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:30:03 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/21 14:55:59 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/15 12:12:09 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,8 +92,10 @@ int		get_flag_args(const char *format, t_params *prm)
 		else
 			ret = 1;
 	}
-	if (*format == '0' && prm->before)
+	if (*format == '0' && format[1] != '*' && prm->before)
+	{
 		prm->zero_arg = '0';
+	}
 	if (ret != 2 && ret != 3)
 		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, prm->flag))))
 		{
