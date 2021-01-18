@@ -18,7 +18,7 @@ int		s_bpos_apos(t_params prm, char *str)
 	t_pos	var;
 
 	i = 0;
-	init_var_apos_char(prm, &var, (int)ft_strlen(str));
+	init_var_apos_char(prm, &var, (int)strlen(str));
 	while (var.space--)
 		ft_putchar(' ');
 	while (i < var.len)
@@ -30,7 +30,7 @@ int		s_bpos_aneg_or_noafter(t_params prm, char *str)
 {
 	t_pos	var;
 
-	init_var_aneg_char(prm, &var, (int)ft_strlen(str));
+	init_var_aneg_char(prm, &var, (int)strlen(str));
 	if (prm.before < 0)
 	{
 		ft_putstr(str);
@@ -50,7 +50,7 @@ int		s_bneg_aneg(t_params prm, char *str)
 {
 	t_pos	var;
 
-	init_var_aneg_char(prm, &var, (int)ft_strlen(str));
+	init_var_aneg_char(prm, &var, (int)strlen(str));
 	ft_putstr(str);
 	while (var.space--)
 		ft_putchar(' ');
@@ -63,7 +63,7 @@ int		s_bneg_apos(t_params prm, char *str)
 	t_pos	var;
 
 	i = 0;
-	init_var_apos_char(prm, &var, (int)ft_strlen(str));
+	init_var_apos_char(prm, &var, (int)strlen(str));
 	while (var.len--)
 		ft_putchar(str[i++]);
 	while (var.space--)

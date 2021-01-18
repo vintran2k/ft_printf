@@ -2,7 +2,16 @@
 
 int		main()
 {
-	ft_printf("|%04.0d|\n", 198);
-	printf("|%04.*d|\n", -5, 198);
+	int c;
+
+	c = 48;
+	printf("|%-4.c|\n\n", c);
+	ft_printf("|%-4.c|\n", c);
 	return (0);
 }
+/*
+int		main()
+{
+	printf("|%04d|\n\n", 198);
+	ft_printf("|%04d|\n", 198);
+}*/

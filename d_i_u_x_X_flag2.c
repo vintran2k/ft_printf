@@ -34,8 +34,10 @@ int		d_bpos_aneg(t_params prm, int nb)
 {
 	t_pos var;
 	//printf("bpos aneg\n");
+	if (prm.zero_arg == '0' && prm.after == 0 && prm.n == 3) 
+		prm.zero_arg = ' ';
 	init_var_aneg(prm, &var, nb);
-	if (prm.zero_arg == '0' && nb < 0)
+	if (prm.zero_arg == '0' && nb < 0 && (prm.flag == 'd' || prm.flag == 'i'))
 	{
 		ft_putchar('-');
 		nb = -nb;

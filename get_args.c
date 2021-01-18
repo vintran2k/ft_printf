@@ -81,7 +81,7 @@ int		get_star_args(const char *format, t_params *prm)
 
 int		get_flag_args(const char *format, t_params *prm)
 {
-	int ret;
+	int		ret;
 
 	ret = get_star_args(format, prm);
 	if (ret != 1 && ret != 3)
@@ -92,16 +92,15 @@ int		get_flag_args(const char *format, t_params *prm)
 		else
 			ret = 1;
 	}
-	if (*format == '0' && format[1] != '*' && prm->before)
-	{
+	if (*format == '0' && prm->before)
 		prm->zero_arg = '0';
-	}
 	if (ret != 2 && ret != 3)
 		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, prm->flag))))
 		{
 			format++;
 			prm->after = ft_atoi(format);
-			ret = 3;
+			//if (*format >= '0' && *format <= '9')
+				ret = 3;
 		}
 	return (ret);
 }

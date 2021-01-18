@@ -24,6 +24,7 @@ typedef	struct	s_params
 	char		flag;
 	int 		before;
 	int			after;
+	int			n;
 	char		zero_arg;
 }				t_params;
 
@@ -38,7 +39,7 @@ typedef struct	s_pos
 int		ft_printf(const char *format, ...);
 void	ft_putnbr(int nb);
 void	ft_putchar(char c);
-size_t	ft_strlen(const char *s);
+size_t	strlen(const char *s);
 int		nbr_len(int nb);
 int		nbr_unsigned_len(unsigned int nb, unsigned int base);
 int		addrlen(unsigned long long addr);
@@ -59,8 +60,8 @@ int		get_flag_args(const char *format, t_params *prm);
 void	init_params(t_params *prm, va_list *args, char flag);
 void	init_var_apos(t_params prm, t_pos *var, int nb);
 void	init_var_aneg(t_params prm, t_pos *var, int nb);
-void	init_var_apos_char(t_params prm, t_pos *var, int len);
-void	init_var_aneg_char(t_params prm, t_pos *var, int len);
+void	init_var_apos_char(t_params prm, t_pos *var, int length);
+void	init_var_aneg_char(t_params prm, t_pos *var, int length);
 int		parsing_d_i_u_x_X(const char *format, t_params *prm);
 int		print_d_i_u_x_X(const char *format, va_list *args, char flag);
 int		d_bpos_apos(t_params prm, int nb);

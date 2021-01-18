@@ -36,7 +36,7 @@ void	ft_putnbr_u(unsigned int nb)
 
 void	print_nb(int nb, char flag)
 {
-	if (flag == 'd')
+	if (flag == 'd' || flag == 'i')
 		ft_putnbr(nb);
 	else if (flag == 'u')
 		ft_putnbr_u((unsigned int)nb);
@@ -60,7 +60,7 @@ void	print_addr(unsigned long long addr)
 
 int		real_len(int nb, char flag)
 {
-	if (flag == 'd')
+	if (flag == 'd' || flag == 'i')
 		return (nbr_len(nb));
 	if (flag == 'u')
 		return (nbr_unsigned_len(nb, 10));

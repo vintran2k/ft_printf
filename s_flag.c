@@ -36,11 +36,13 @@ int		parsing_s(const char *format, t_params *prm)
 	char	*str;
 
 	format++;
-	if (get_flag_args(format, prm) == 1)
-	{
-		str = va_arg(*(prm->args), char *);
-		return (s_bpos_aneg_or_noafter(*prm, str));
-	}
+	prm->n = get_flag_args(format, prm);
 	str = va_arg(*(prm->args), char *);
+	if (!str)
+		str = "(null)";
+	if (prm->n == 1)
+		return (s_bpos_aneg_or_noafter(*prm, str));
+	if (prm->n == 3 && prm->after == 0 && !str)
+		return(special_zero(prm->before));
 	return (s_fonction_choice(*prm, str));
 }

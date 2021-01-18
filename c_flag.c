@@ -33,14 +33,14 @@ int		c_fonction_choice(t_params prm, char c)
 
 int		parsing_c(const char *format, t_params *prm)
 {
-	char	c;
+	int	c;
 
 	format++;
-	if (get_flag_args(format, prm) == 1)
-	{
-		c = va_arg(*(prm->args), int);
-		return (c_bpos_aneg_or_noafter(*prm, c));
-	}
+	prm->n = get_flag_args(format, prm);
 	c = va_arg(*(prm->args), int);
+	if (prm->n == 1)
+		return (c_bpos_aneg_or_noafter(*prm, c));
+	//if (prm->n == 3 && prm->after == 0 && c < 0)
+	//	return(special_zero(prm->before));
 	return (c_fonction_choice(*prm, c));
 }

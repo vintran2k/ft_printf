@@ -16,6 +16,7 @@ int		c_bpos_apos(t_params prm, char c)
 {
 	t_pos	var;
 
+	//printf("bpos apos\n");
 	init_var_apos_char(prm, &var, 1);
 	while (var.space--)
 		ft_putchar(' ');
@@ -27,6 +28,7 @@ int		c_bpos_aneg_or_noafter(t_params prm, char c)
 {
 	t_pos	var;
 
+	//printf("bpos aneg\n");
 	init_var_aneg_char(prm, &var, 1);
 	if (prm.before < 0)
 	{
@@ -47,6 +49,7 @@ int		c_bneg_aneg(t_params prm, char c)
 {
 	t_pos	var;
 
+	//printf("bneg aneg\n");
 	init_var_aneg_char(prm, &var, 1);
 	ft_putchar(c);
 	while (var.space--)
@@ -59,10 +62,11 @@ int		c_bneg_apos(t_params prm, char c)
 	int		i;
 	t_pos	var;
 
+	//printf("bneg apos\n");
 	i = 0;
 	init_var_apos_char(prm, &var, 1);
-	while (var.len--)
-		ft_putchar(c);
+	ft_putchar(c);
+	//printf("space = %d\n", var.space);
 	while (var.space--)
 		ft_putchar(' ');
 	return (var.ret);

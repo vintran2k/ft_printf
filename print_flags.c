@@ -39,8 +39,10 @@ int		print_s(const char *format, va_list *args)
 	if (flag_len(format, 's'))
 		return (parsing_s(format, &prm));
 	str = va_arg(*args, char *);
+	if (!str)
+		str = "(null)";
 	ft_putstr(str);
-	return ((int)ft_strlen(str));
+	return ((int)strlen(str));
 }
 
 int		print_p(const char *format, va_list *args)

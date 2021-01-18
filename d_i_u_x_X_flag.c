@@ -16,6 +16,8 @@ int		special_zero(int before)
 {
 	int ret;
 
+	if (before < 0)
+		before *= -1;
 	ret = before;
     while (before-- > 0)
         ft_putchar(' ');
@@ -44,16 +46,14 @@ int		fonction_choice(t_params prm, int nb)
 int		parsing_d_i_u_x_X(const char *format, t_params *prm)
 {
 	int nb;
+
 	format++;
-	if (get_flag_args(format, prm) == 3 && prm->after == 0)
-	{
-		//printf("BEFORE = %d   AFTER = %d|", prm->before, prm->after);
-		nb = va_arg(*(prm->args), int);
-		if (nb == 0)
+	prm->n = get_flag_args(format, prm);
+	nb = va_arg(*(prm->args), int);
+	if (prm->n == 3 && prm->after == 0 && nb == 0)
 			return (special_zero(prm->before));
-	}
-	else
-		nb = va_arg(*(prm->args), int);
+	//printf("%d\n", nb);
+	//ft_putnbr_u((unsigned int)nb);
 	//printf("BEFORE = %d   AFTER = %d|", prm->before, prm->after);
 	return (fonction_choice(*prm, nb));
 }

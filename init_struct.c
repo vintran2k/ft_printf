@@ -18,6 +18,7 @@ void	init_params(t_params *prm, va_list *args, char flag)
 	prm->flag = flag;
 	prm->before = 0;
 	prm->after = 0;
+	prm->n = 0;
 	prm->zero_arg = ' ';
 }
 
@@ -58,12 +59,12 @@ void	init_var_aneg(t_params prm, t_pos *var, int nb)
 //	printf("   NBLEN = %d  SPACE = %d  RET = %d  |", var->len, var->space, var->ret);
 }
 
-void	init_var_apos_char(t_params prm, t_pos *var, int len)
+void	init_var_apos_char(t_params prm, t_pos *var, int length)
 {
-	var->len = len;
+	var->len = length;
 	if (prm.before < 0)
 		prm.before = -(prm.before);
-	if (prm.after < var->len)
+	if (prm.flag == 's' && prm.after < var->len)
 		var->len = prm.after;
 	var->space = 0;
 	if (prm.before > var->len)
@@ -71,9 +72,9 @@ void	init_var_apos_char(t_params prm, t_pos *var, int len)
 	var->ret = var->space + var->len;
 }
 
-void	init_var_aneg_char(t_params prm, t_pos *var, int len)
+void	init_var_aneg_char(t_params prm, t_pos *var, int length)
 {
-	var->len = len;
+	var->len = length;
 	if (prm.before < 0)
 		prm.before = -(prm.before);
 	var->space = 0;
