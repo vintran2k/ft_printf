@@ -6,13 +6,13 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 10:38:00 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/27 15:05:37 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:04:51 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		nbr_len(int nb)
+int		nbr_len(long nb)
 {
 	int len;
 
@@ -63,16 +63,12 @@ int		flag_len(const char *format, char flag)
 	return (i);
 }
 
-size_t	strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t i;
 
 	i = 0;
-	if (s)
-	{
-		while (s[i])
-			i++;
-		return (i);
-	}
-	return (6);
+	while (s[i])
+		i++;
+	return (i);
 }

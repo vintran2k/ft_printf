@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 17:41:33 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/27 15:39:43 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/19 12:10:12 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_putnbr_hex(unsigned int nb, char flag)
 {
-	char 			*base_min;
-	char 			*base_maj;
+	char	*base_min;
+	char	*base_maj;
 
 	base_min = "0123456789abcdef";
 	base_maj = "0123456789ABCDEF";
@@ -34,7 +34,7 @@ void	ft_putnbr_u(unsigned int nb)
 	ft_putchar(nb % 10 + '0');
 }
 
-void	print_nb(int nb, char flag)
+void	print_nb(long nb, char flag)
 {
 	if (flag == 'd' || flag == 'i')
 		ft_putnbr(nb);
@@ -46,12 +46,12 @@ void	print_nb(int nb, char flag)
 
 void	print_addr(unsigned long long addr)
 {
-	char *base = "0123456789abcdef";
+	char *base;
 
+	base = "0123456789abcdef";
 	if (!addr)
 	{
-		ft_putchar('0');
-		ft_putchar('x');
+		ft_putstr("0x");
 		return ;
 	}
 	print_addr(addr / 16);

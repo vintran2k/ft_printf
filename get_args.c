@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:30:03 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 12:12:09 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/22 11:45:19 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,15 @@ int		is_star(const char *format, char flag)
 
 int		is_star_ret_one(const char *format, t_params *prm)
 {
-	int ret;
+	int		ret;
+	char	*star;
 
 	ret = 0;
 	prm->before = va_arg(*(prm->args), int);
 	ret = 1;
-	if (*format == '-' && prm->before > 0)
+	star = ft_memchr(format, '*', flag_len(format, prm->flag));
+	if ((star[-1] == '-' && prm->before > 0)
+			|| (*format == '-' && prm->before > 0))
 		prm->before = -(prm->before);
 	format = ft_memchr(format, '*', flag_len(format, prm->flag)) + 1;
 	if (is_star(format, prm->flag) == 2)
@@ -49,7 +52,8 @@ int		is_star_ret_one(const char *format, t_params *prm)
 
 int		is_star_ret_two(const char *format, t_params *prm)
 {
-	int ret;
+	int		ret;
+	char	*star;
 
 	ret = 0;
 	if (ft_memchr(format, '.', flag_len(format, prm->flag)))
@@ -61,7 +65,9 @@ int		is_star_ret_two(const char *format, t_params *prm)
 	{
 		prm->before = va_arg(*(prm->args), int);
 		ret = 1;
-		if (*format == '-' && prm->before > 0)
+		star = ft_memchr(format, '*', flag_len(format, prm->flag));
+		if ((star[-1] == '-' && prm->before > 0)
+				|| (*format == '-' && prm->before > 0))
 			prm->before = -(prm->before);
 	}
 	return (ret);
@@ -95,12 +101,12 @@ int		get_flag_args(const char *format, t_params *prm)
 	if (*format == '0' && prm->before)
 		prm->zero_arg = '0';
 	if (ret != 2 && ret != 3)
-		if ((format = (const char *)ft_memchr(format, '.', flag_len(format, prm->flag))))
+		if ((format = (const char *)ft_memchr(format, '.',
+		flag_len(format, prm->flag))))
 		{
 			format++;
 			prm->after = ft_atoi(format);
-			//if (*format >= '0' && *format <= '9')
-				ret = 3;
+			ret = 3;
 		}
 	return (ret);
 }

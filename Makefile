@@ -4,16 +4,18 @@ SRCS		= 	ft_printf.c					\
 				utils3.c					\
 				get_args.c					\
 				init_struct.c				\
-				d_i_u_x_X_flag.c			\
-				d_i_u_x_X_flag2.c			\
+				init_struct2.c				\
+				diux_flag.c					\
+				diux_flag2.c				\
 				c_flag.c					\
 				c_flag2.c					\
 				s_flag.c					\
 				s_flag2.c					\
 				p_flag.c					\
+				p_flag2.c					\
 				print_flags.c				\
 		
-OBJS		= ${SRCS:.c=.o}
+OBJS		= $(SRCS:.c=.o)
 
 NAME		= libftprintf.a
 
@@ -24,18 +26,18 @@ RM			= rm -f
 CFLAGS		= -Wall -Wextra -Werror
 
 .c.o:		
-			${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+			$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
 
-${NAME}:	${OBJS}
-			ar rc ${NAME} ${OBJS}
+$(NAME):	$(OBJS)
+			ar rc $(NAME) $(OBJS)
 
-all:		${NAME}
+all:		$(NAME)
 
 clean:		
-			${RM} ${OBJS} ${BOBJ}
+			$(RM) $(OBJS)
 
 fclean:		clean
-			${RM} ${NAME}
+			$(RM) $(NAME)
 
 re:			fclean all
 

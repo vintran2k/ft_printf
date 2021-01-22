@@ -6,20 +6,20 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 11:26:19 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 11:54:55 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/22 11:45:37 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		print_d_i_u_x_X(const char *format, va_list *args, char flag)
+int		print_diux(const char *format, va_list *args, char flag)
 {
-	int 		nb;
+	int			nb;
 	t_params	prm;
 
 	init_params(&prm, args, flag);
 	if (flag_len(format, flag))
-		return (parsing_d_i_u_x_X(format, &prm));
+		return (parsing_diux(format, &prm));
 	nb = va_arg(*args, int);
 	if (flag == 'd' || flag == 'i')
 		ft_putnbr(nb);
@@ -42,7 +42,7 @@ int		print_s(const char *format, va_list *args)
 	if (!str)
 		str = "(null)";
 	ft_putstr(str);
-	return ((int)strlen(str));
+	return ((int)ft_strlen(str));
 }
 
 int		print_p(const char *format, va_list *args)
@@ -68,5 +68,22 @@ int		print_c(const char *format, va_list *args)
 		return (parsing_c(format, &prm));
 	c = va_arg(*args, int);
 	ft_putchar(c);
+	return (1);
+}
+
+int		print_pourcent(const char *format, va_list *args)
+{
+	t_params	prm;
+
+	init_params(&prm, args, '%');
+	format++;
+	if (flag_len(format, '%'))
+	{
+		prm.n = get_flag_args(format, &prm);
+		if (prm.before > 0 && prm.zero_arg == '0')
+			return (pourcent_special_zero(prm.before));
+		return (c_fonction_choice(prm, '%'));
+	}
+	ft_putchar('%');
 	return (1);
 }

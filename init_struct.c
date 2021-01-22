@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/26 17:46:08 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 11:46:02 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/19 11:53:52 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_params(t_params *prm, va_list *args, char flag)
 	prm->zero_arg = ' ';
 }
 
-void	init_var_apos(t_params prm, t_pos *var, int nb)
+void	init_var_apos_diux(t_params prm, t_pos *var, int nb)
 {
 	var->len = real_len(nb, prm.flag);
 	var->zero = 0;
@@ -36,10 +36,9 @@ void	init_var_apos(t_params prm, t_pos *var, int nb)
 	if (prm.before > (var->zero + var->len))
 		var->space = prm.before - (var->zero + var->len);
 	var->ret = var->len + var->space + var->zero;
-//	printf("   NBLEN = %d  ZERO = %d  SPACE = %d  RET = %d  |", var->len, var->zero, var->space, var->ret);
 }
 
-void	init_var_aneg(t_params prm, t_pos *var, int nb)
+void	init_var_aneg_diux(t_params prm, t_pos *var, int nb)
 {
 	var->len = real_len(nb, prm.flag);
 	if (prm.before < 0)
@@ -56,10 +55,9 @@ void	init_var_aneg(t_params prm, t_pos *var, int nb)
 		var->ret = prm.before;
 	else
 		var->ret = var->len;
-//	printf("   NBLEN = %d  SPACE = %d  RET = %d  |", var->len, var->space, var->ret);
 }
 
-void	init_var_apos_char(t_params prm, t_pos *var, int length)
+void	init_var_apos_cs(t_params prm, t_pos *var, int length)
 {
 	var->len = length;
 	if (prm.before < 0)
@@ -72,7 +70,7 @@ void	init_var_apos_char(t_params prm, t_pos *var, int length)
 	var->ret = var->space + var->len;
 }
 
-void	init_var_aneg_char(t_params prm, t_pos *var, int length)
+void	init_var_aneg_cs(t_params prm, t_pos *var, int length)
 {
 	var->len = length;
 	if (prm.before < 0)

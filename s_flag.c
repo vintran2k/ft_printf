@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 16:06:37 by vintran           #+#    #+#             */
-/*   Updated: 2020/11/27 15:14:38 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/20 13:58:46 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ int		parsing_s(const char *format, t_params *prm)
 	if (prm->n == 1)
 		return (s_bpos_aneg_or_noafter(*prm, str));
 	if (prm->n == 3 && prm->after == 0 && !str)
-		return(special_zero(prm->before));
+		return (special_zero(prm->before));
 	return (s_fonction_choice(*prm, str));
 }

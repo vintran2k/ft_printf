@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   d_i_u_x_X_flag.c                                   :+:      :+:    :+:   */
+/*   diux_flag.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/03 12:51:09 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 12:15:42 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/22 11:43:43 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@ int		special_zero(int before)
 	if (before < 0)
 		before *= -1;
 	ret = before;
-    while (before-- > 0)
-        ft_putchar(' ');
-    return (ret);
+	while (before-- > 0)
+		ft_putchar(' ');
+	return (ret);
 }
 
-int		fonction_choice(t_params prm, int nb)
+int		fonction_choice(t_params prm, long nb)
 {
 	if (prm.before > 0)
 	{
@@ -43,17 +43,22 @@ int		fonction_choice(t_params prm, int nb)
 	return (0);
 }
 
-int		parsing_d_i_u_x_X(const char *format, t_params *prm)
+int		parsing_diux(const char *format, t_params *prm)
 {
-	int nb;
+	int		nbr;
+	long	nb;
+	int		ret;
 
+	ret = 0;
 	format++;
 	prm->n = get_flag_args(format, prm);
-	nb = va_arg(*(prm->args), int);
+	nbr = va_arg(*(prm->args), int);
+	nb = nbr;
+	if (*format == ' ')
+		ret = ft_printf(" ");
 	if (prm->n == 3 && prm->after == 0 && nb == 0)
-			return (special_zero(prm->before));
-	//printf("%d\n", nb);
-	//ft_putnbr_u((unsigned int)nb);
-	//printf("BEFORE = %d   AFTER = %d|", prm->before, prm->after);
-	return (fonction_choice(*prm, nb));
+		ret += (special_zero(prm->before));
+	else
+		ret += (fonction_choice(*prm, nb));
+	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: vintran <vintran@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 10:11:58 by vintran           #+#    #+#             */
-/*   Updated: 2021/01/15 12:14:03 by vintran          ###   ########.fr       */
+/*   Updated: 2021/01/20 17:05:04 by vintran          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_putchar(char c)
 	write(1, &c, 1);
 }
 
-void	ft_putnbr(int nb)
+void	ft_putnbr(long nb)
 {
 	if (nb < 0)
 	{
@@ -49,6 +49,8 @@ int		ft_atoi(const char *str)
 	i = 0;
 	res = 0;
 	sign = 1;
+	while (str[i] == '0')
+		i++;
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == ' ')
 		i++;
 	while (str[i] == '+' || str[i] == '-')
